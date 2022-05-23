@@ -1,0 +1,12 @@
+package com.residencia.academia.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.residencia.academia.repository.InstrutorRepository;
+
+@Service
+public class InstrutorService {
+	@Autowired
+	InstrutorRepository instrutorRepository;
+}
