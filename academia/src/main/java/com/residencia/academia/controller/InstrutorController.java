@@ -58,6 +58,6 @@ public class InstrutorController {
 		if(null == instrutor)
 			throw new NoSuchElementFoundException("Não foi possivél excluir pois não foi encontrado um instrutor com o id " + id);
 		  instrutorService.deleteInstrutor(id);
-		return new ResponseEntity<>("",HttpStatus.OK);
+		return new ResponseEntity<>("Deletado!",HttpStatus.OK);
 	}
 }

@@ -31,12 +31,7 @@ public class AtividadeService {
 	}
 
 	public void deleteAtividade(Integer id) {
-		Atividade inst = atividadeRepository.findById(id).get();
-		atividadeRepository.delete(inst);
-	}
-
-	public void deleteAtividade(Atividade atividade) {
-		atividadeRepository.delete(atividade);
+	atividadeRepository.deleteById(id);
 	}
 
 }

@@ -57,7 +57,7 @@ public class AtividadeController {
 		Atividade atividade = atividadeService.findAtividadeById(id);
 		if(null == atividade)
 			throw new NoSuchElementFoundException("Não foi possivél excluir pois não foi encontrada atividade com o id " + id);
-		  atividadeService.deleteAtividade(id);
-		return new ResponseEntity<>("",HttpStatus.OK);
+		atividadeService.deleteAtividade(id);
+		return new ResponseEntity<>("Deletado!",HttpStatus.OK);
 	}
 }
