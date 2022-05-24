@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.residencia.academia.entity.Turma;
+import com.residencia.academia.excepition.NoSuchElementFoundException;
 import com.residencia.academia.service.TurmaService;
 
 @RestController
@@ -29,10 +30,13 @@ public class TurmaController {
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<Turma> findTurmaById(@PathVariable Integer id){
-		return new ResponseEntity<>(turmaService.findTurmaById(id), HttpStatus.OK);
+	public ResponseEntity<Turma> findTurmaById(@PathVariable Integer id) {
+		Turma turma = turmaService.findTurmaById(id);
+		if(null == turma)
+			throw new NoSuchElementFoundException("Não foi encontrada Turma com o id " + id);
+		else
+			return new ResponseEntity<>(turmaService.findTurmaById(id), HttpStatus.OK);
 	}
-
 	@PostMapping
 	public ResponseEntity<Turma> saveTurma(@RequestBody Turma turma){
 		return new ResponseEntity<>(turmaService.saveTurma(turma), HttpStatus.CREATED);
@@ -43,7 +47,10 @@ public class TurmaController {
 	}
 	@DeleteMapping("/{id}")
 	public ResponseEntity<String> deleteTurma(@PathVariable Integer id){
-		turmaService.deleteTurma(id);
+		Turma turma = turmaService.findTurmaById(id);
+		if(null == turma)
+			throw new NoSuchElementFoundException("Não foi excluir pois não encontrada Turma com o id " + id);
+		  turmaService.deleteTurma(id);
 		return new ResponseEntity<>("",HttpStatus.OK);
 	}
 }

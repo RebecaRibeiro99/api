@@ -12,10 +12,15 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table(name = "turma")
+/*@JsonIdentityInfo(
+generator = ObjectIdGenerators.PropertyGenerator.class,
+property = "idTurma")*/
 public class Turma {
 	@Column(name = "id_turma")
 	@Id
@@ -35,7 +40,8 @@ public class Turma {
 	private Date dataFim;
 
 	@ManyToOne
-	@JsonBackReference
+	//@JsonBackReference
+	@JsonIgnore
 	@JoinColumn(name = "id_instrutor", referencedColumnName = "id_instrutor")
 	private Instrutor instrutor;
 

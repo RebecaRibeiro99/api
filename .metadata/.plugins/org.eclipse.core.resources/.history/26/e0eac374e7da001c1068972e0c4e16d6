@@ -1,0 +1,6 @@
+package com.residencia.academia.excepition;
+
+
+public class NoSuchElementFoundException {
+
+}
