@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.residencia.academia.entity.Instrutor;
+import com.residencia.academia.entity.Turma;
+import com.residencia.academia.excepition.NoSuchElementFoundException;
 import com.residencia.academia.service.InstrutorService;
 
 @RestController
@@ -34,13 +36,13 @@ public class InstrutorController {
 	public ResponseEntity<Instrutor> findAllInstrutorById(@PathVariable Integer id) {
 		Instrutor instrutor = instrutorService.findInstrutorById(id);
 		if(null == instrutor)
-			return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+			throw new NoSuchElementFoundException("Não foi encontrada Instrutor com o id " + id);
 		else
-		return new ResponseEntity<>(instrutor, HttpStatus.OK);
+			return new ResponseEntity<>(instrutorService.findInstrutorById(id), HttpStatus.OK);
 	}
 
 	@PostMapping
-	public ResponseEntity<Instrutor> sabeInstrutor(@RequestBody Instrutor instrutor) {
+	public ResponseEntity<Instrutor> saveInstrutor(@RequestBody Instrutor instrutor) {
 		Instrutor novoInstrutor = instrutorService.saveInstrutor(instrutor);
 		return new ResponseEntity<>(novoInstrutor, HttpStatus.CREATED);
 	}
@@ -51,8 +53,11 @@ public class InstrutorController {
 		return new ResponseEntity<>(novoInstrutor, HttpStatus.OK);
 	}
 	@DeleteMapping("/{id}")
-	public ResponseEntity<String> deleteInstrutor(@PathVariable Integer id) {
-		instrutorService.deleteInstrutor(id);
-		return new ResponseEntity<>("", HttpStatus.OK);
+	public ResponseEntity<String> deleteInstrutor(@PathVariable Integer id){
+		Instrutor instrutor = instrutorService.findInstrutorById(id);
+		if(null == instrutor)
+			throw new NoSuchElementFoundException("Não foi possivél excluir pois não foi encontrado um instrutor com o id " + id);
+		  instrutorService.deleteInstrutor(id);
+		return new ResponseEntity<>("",HttpStatus.OK);
 	}
 }

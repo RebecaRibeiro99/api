@@ -6,12 +6,17 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="Autor"/>
+		<item key="selection" value=""/>
 		<list key="findhistory">
-			<item value="Editora"/>
+			<item value="Instrutor"/>
+			<item value="instrutor"/>
 			<item value="editora"/>
+			<item value="Editora"/>
 		</list>
 		<list key="replacehistory">
+			<item value=""/>
+			<item value="Atividade"/>
+			<item value="atividade"/>
 			<item value="Autor"/>
 			<item value="autor"/>
 		</list>

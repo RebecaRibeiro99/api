@@ -2,6 +2,7 @@
 <section name="Workbench">
 	<section name="MavenProjectImportWizardPage">
 		<list key="rootDirectory">
+			<item value="C:\Users\Rebeca\Desktop\api"/>
 			<item value="C:\Users\Rebeca\Desktop\api\api"/>
 			<item value="C:\Users\Rebeca\Desktop\api\1_api"/>
 		</list>
