@@ -28,14 +28,17 @@ public class AtividadeController {
 	@GetMapping
 	public ResponseEntity<List<Atividade>> findAllAtividade() {
 		List<Atividade> atividadeList = atividadeService.findAllAtividade();
-		// return ResponseEntity.ok().body(atividadeList);
-		return new ResponseEntity<>(atividadeList, HttpStatus.OK);
+		if (atividadeList.isEmpty()) {
+			return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+		} else {
+			return new ResponseEntity<>(atividadeList, HttpStatus.OK);
+		}
 	}
 
 	@GetMapping("/{id}")
 	public ResponseEntity<Atividade> findAllAtividadeById(@PathVariable Integer id) {
 		Atividade atividade = atividadeService.findAtividadeById(id);
-		if(null == atividade)
+		if (null == atividade)
 			throw new NoSuchElementFoundException("Não foi encontrada Atividade com o id " + id);
 		else
 			return new ResponseEntity<>(atividadeService.findAtividadeById(id), HttpStatus.OK);
@@ -52,12 +55,14 @@ public class AtividadeController {
 		Atividade novoAtividade = atividadeService.updateAtividade(atividade);
 		return new ResponseEntity<>(novoAtividade, HttpStatus.OK);
 	}
+
 	@DeleteMapping("/{id}")
-	public ResponseEntity<String> deleteAtividade(@PathVariable Integer id){
+	public ResponseEntity<String> deleteAtividade(@PathVariable Integer id) {
 		Atividade atividade = atividadeService.findAtividadeById(id);
-		if(null == atividade)
-			throw new NoSuchElementFoundException("Não foi possivél excluir pois não foi encontrada atividade com o id " + id);
+		if (null == atividade)
+			throw new NoSuchElementFoundException(
+					"Não foi possivél excluir pois não foi encontrada atividade com o id " + id);
 		atividadeService.deleteAtividade(id);
-		return new ResponseEntity<>("Deletado!",HttpStatus.OK);
+		return new ResponseEntity<>("Deletado!", HttpStatus.OK);
 	}
 }

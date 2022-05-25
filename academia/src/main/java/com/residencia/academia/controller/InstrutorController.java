@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.residencia.academia.dto.InstrutorDTO;
+import com.residencia.academia.entity.Atividade;
 import com.residencia.academia.entity.Instrutor;
 import com.residencia.academia.entity.Turma;
 import com.residencia.academia.excepition.NoSuchElementFoundException;
@@ -28,14 +30,23 @@ public class InstrutorController {
 	@GetMapping
 	public ResponseEntity<List<Instrutor>> findAllInstrutor() {
 		List<Instrutor> instrutorList = instrutorService.findAllInstrutor();
-		// return ResponseEntity.ok().body(instrutorList);
-		return new ResponseEntity<>(instrutorList, HttpStatus.OK);
+		if (instrutorList.isEmpty()) {
+			return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+		} else {
+			return new ResponseEntity<>(instrutorList, HttpStatus.OK);
+		}
+	}
+
+	@GetMapping("/dto/{id}")
+	public ResponseEntity<InstrutorDTO> findAllInstrutorDTOById(@PathVariable Integer id) {
+		InstrutorDTO instrutorDTO = instrutorService.findInstrutorDTOById(id);
+		return new ResponseEntity<>(instrutorDTO, HttpStatus.OK);
 	}
 
 	@GetMapping("/{id}")
 	public ResponseEntity<Instrutor> findAllInstrutorById(@PathVariable Integer id) {
 		Instrutor instrutor = instrutorService.findInstrutorById(id);
-		if(null == instrutor)
+		if (null == instrutor)
 			throw new NoSuchElementFoundException("Não foi encontrada Instrutor com o id " + id);
 		else
 			return new ResponseEntity<>(instrutorService.findInstrutorById(id), HttpStatus.OK);
@@ -47,17 +58,26 @@ public class InstrutorController {
 		return new ResponseEntity<>(novoInstrutor, HttpStatus.CREATED);
 	}
 
+	@PostMapping("/dto")
+	public ResponseEntity<InstrutorDTO> saveInstrutorDTO(@RequestBody InstrutorDTO instrutorDTO) {
+		InstrutorDTO novoInstrutorDTO = instrutorService.saveInstrutorDTO(instrutorDTO);
+		return new ResponseEntity<>(novoInstrutorDTO, HttpStatus.CREATED);
+	}
+
 	@PutMapping
 	public ResponseEntity<Instrutor> updateInstrutor(@RequestBody Instrutor instrutor) {
 		Instrutor novoInstrutor = instrutorService.updateInstrutor(instrutor);
 		return new ResponseEntity<>(novoInstrutor, HttpStatus.OK);
 	}
+
 	@DeleteMapping("/{id}")
-	public ResponseEntity<String> deleteInstrutor(@PathVariable Integer id){
+	public ResponseEntity<String> deleteInstrutor(@PathVariable Integer id) {
 		Instrutor instrutor = instrutorService.findInstrutorById(id);
-		if(null == instrutor)
-			throw new NoSuchElementFoundException("Não foi possivél excluir pois não foi encontrado um instrutor com o id " + id);
-		  instrutorService.deleteInstrutor(id);
-		return new ResponseEntity<>("Deletado!",HttpStatus.OK);
+		if (null == instrutor)
+			throw new NoSuchElementFoundException(
+					"Não foi possivél excluir pois não foi encontrado um instrutor com o id " + id);
+		instrutorService.deleteInstrutor(id);
+		return new ResponseEntity<>("Deletado!", HttpStatus.OK);
 	}
+
 }
