@@ -46,7 +46,11 @@ public class AtividadeController {
 	@GetMapping("/dto/{id}")
 	public ResponseEntity<AtividadeDTO> findAllAtividadeDTOById(@PathVariable Integer id) {
 		AtividadeDTO atividadeDTO = atividadeService.findAtividadeDTOById(id);
-		return new ResponseEntity<>(atividadeDTO, HttpStatus.OK);
+		if (null == atividadeDTO) {
+			throw new NoSuchElementFoundException("Não foi encontrada Atividade com o id " + id);
+		} else {
+			return new ResponseEntity<>(atividadeDTO, HttpStatus.OK);
+		}
 	}
 
 

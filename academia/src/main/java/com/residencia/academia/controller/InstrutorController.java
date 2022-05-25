@@ -35,11 +35,6 @@ public class InstrutorController {
 		}
 	}
 
-	@GetMapping("/dto/{id}")
-	public ResponseEntity<InstrutorDTO> findAllInstrutorDTOById(@PathVariable Integer id) {
-		InstrutorDTO instrutorDTO = instrutorService.findInstrutorDTOById(id);
-		return new ResponseEntity<>(instrutorDTO, HttpStatus.OK);
-	}
 
 	@GetMapping("/{id}")
 	public ResponseEntity<Instrutor> findAllInstrutorById(@PathVariable Integer id) {
@@ -48,6 +43,16 @@ public class InstrutorController {
 			throw new NoSuchElementFoundException("Não foi encontrada Instrutor com o id " + id);
 		else
 			return new ResponseEntity<>(instrutorService.findInstrutorById(id), HttpStatus.OK);
+	}
+	@GetMapping("/dto/{id}")
+	public ResponseEntity<InstrutorDTO> findAllInstrutorDTOById(@PathVariable Integer id) {
+		InstrutorDTO instrutorDTO = instrutorService.findInstrutorDTOById(id);
+		if (null == instrutorDTO) {
+			throw new NoSuchElementFoundException("Não foi encontrada Instrutor com o id " + id);
+		} else {
+			return new ResponseEntity<>(instrutorDTO, HttpStatus.OK);
+		}
+		
 	}
 
 	@PostMapping

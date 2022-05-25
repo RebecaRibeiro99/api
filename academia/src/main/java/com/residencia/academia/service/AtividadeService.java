@@ -43,8 +43,10 @@ public class AtividadeService {
 		AtividadeDTO atividadeDTO = new AtividadeDTO();
 		if (null != atividade) {
 			atividadeDTO = converteEntidadeParaDTO(atividade);
+			return atividadeDTO;
 		}
-		return atividadeDTO;
+		return null;
+
 	}
 
 	public AtividadeDTO saveAtividadeDTO(AtividadeDTO atividadeDTO) {

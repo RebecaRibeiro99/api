@@ -36,8 +36,9 @@ public class TurmaService {
 		TurmaDTO turmaDTO = new TurmaDTO();
 		if (null != turma) {
 			turmaDTO = converterEntidadeParaDTO(turma);
+			return turmaDTO;
 		}
-		return turmaDTO;
+		return null;
 	}
 
 	public Turma saveTurma(Turma turma) {
