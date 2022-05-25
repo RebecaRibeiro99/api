@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.residencia.academia.entity.Atividade;
+import com.residencia.academia.dto.TurmaDTO;
 import com.residencia.academia.entity.Turma;
 import com.residencia.academia.excepition.NoSuchElementFoundException;
 import com.residencia.academia.service.TurmaService;
@@ -43,12 +43,27 @@ public class TurmaController {
 		else
 			return new ResponseEntity<>(turmaService.findTurmaById(id), HttpStatus.OK);
 	}
+	@GetMapping("/dto/{id}")
+    public ResponseEntity<TurmaDTO> findByIdDTO(@PathVariable(value = "id") Integer id) {
+        TurmaDTO turmaDTO = turmaService.findByIdTurmaDTO(id);
+        if (null == turmaDTO) {
+            throw new NoSuchElementFoundException("Não foi possível encontrar a turma de id: " + id);
+        } else {
+            return new ResponseEntity<>(turmaDTO, HttpStatus.OK);
+        }
+    }
 
 	@PostMapping
 	public ResponseEntity<Turma> saveTurma(@RequestBody Turma turma) {
 		return new ResponseEntity<>(turmaService.saveTurma(turma), HttpStatus.CREATED);
 	}
 
+	@PostMapping("/dto")
+    public ResponseEntity<TurmaDTO> saveDTO(@RequestBody TurmaDTO turmaDTO) {
+        TurmaDTO novoTurmaDTO = turmaService.saveTurmaDTO(turmaDTO);
+        return new ResponseEntity<>(novoTurmaDTO, HttpStatus.CREATED);
+    }
+	
 	@PutMapping
 	public ResponseEntity<Turma> updateTurma(@RequestBody Turma turma) {
 		return new ResponseEntity<>(turmaService.updateTurma(turma), HttpStatus.OK);

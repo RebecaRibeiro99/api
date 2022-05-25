@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.residencia.academia.dto.AtividadeDTO;
 import com.residencia.academia.entity.Atividade;
-import com.residencia.academia.entity.Turma;
 import com.residencia.academia.excepition.NoSuchElementFoundException;
 import com.residencia.academia.service.AtividadeService;
 
@@ -43,11 +43,22 @@ public class AtividadeController {
 		else
 			return new ResponseEntity<>(atividadeService.findAtividadeById(id), HttpStatus.OK);
 	}
+	@GetMapping("/dto/{id}")
+	public ResponseEntity<AtividadeDTO> findAllAtividadeDTOById(@PathVariable Integer id) {
+		AtividadeDTO atividadeDTO = atividadeService.findAtividadeDTOById(id);
+		return new ResponseEntity<>(atividadeDTO, HttpStatus.OK);
+	}
+
 
 	@PostMapping
 	public ResponseEntity<Atividade> saveAtividade(@RequestBody Atividade atividade) {
 		Atividade novoAtividade = atividadeService.saveAtividade(atividade);
 		return new ResponseEntity<>(novoAtividade, HttpStatus.CREATED);
+	}
+	@PostMapping("/dto")
+	public ResponseEntity<AtividadeDTO> saveAtividadeDTO(@RequestBody AtividadeDTO atividadeDTO) {
+		AtividadeDTO novoAtividadeDTO = atividadeService.saveAtividadeDTO(atividadeDTO);
+		return new ResponseEntity<>(novoAtividadeDTO, HttpStatus.CREATED);
 	}
 
 	@PutMapping
