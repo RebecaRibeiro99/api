@@ -12,8 +12,8 @@ public class TurmaDTO {
 	private Integer duracaoTurma;
 	private Date dataInicio;
 	private Date dataFim;
-	private Instrutor instrutor;
-	private Atividade atividade;
+	private InstrutorDTO instrutorDTO;
+	private AtividadeDTO atividadeDTO;
 	
 	public Integer getIdTurma() {
 		return idTurma;
@@ -45,23 +45,25 @@ public class TurmaDTO {
 	public void setDataFim(Date dataFim) {
 		this.dataFim = dataFim;
 	}
-	public Instrutor getInstrutor() {
-		return instrutor;
+	public InstrutorDTO getInstrutorDTO() {
+		return instrutorDTO;
 	}
-	public void setInstrutor(Instrutor instrutor) {
-		this.instrutor = instrutor;
+	public void setInstrutorDTO(InstrutorDTO instrutorDTO) {
+		this.instrutorDTO = instrutorDTO;
 	}
-	public Atividade getAtividade() {
-		return atividade;
+	public AtividadeDTO getAtividadeDTO() {
+		return atividadeDTO;
 	}
-	public void setAtividade(Atividade atividade) {
-		this.atividade = atividade;
+	public void setAtividadeDTO(AtividadeDTO atividadeDTO) {
+		this.atividadeDTO = atividadeDTO;
 	}
 	@Override
 	public String toString() {
 		return "TurmaDTO [idTurma=" + idTurma + ", horarioTurma=" + horarioTurma + ", duracaoTurma=" + duracaoTurma
-				+ ", dataInicio=" + dataInicio + ", dataFim=" + dataFim + "]";
+				+ ", dataInicio=" + dataInicio + ", dataFim=" + dataFim + ", instrutorDTO=" + instrutorDTO
+				+ ", atividadeDTO=" + atividadeDTO + "]";
 	}
+	
 	
 	
 	
