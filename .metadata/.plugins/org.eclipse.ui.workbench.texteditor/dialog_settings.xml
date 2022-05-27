@@ -6,8 +6,11 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="atividade"/>
+		<item key="selection" value="id_fornecedor"/>
 		<list key="findhistory">
+			<item value="id_fornecedor"/>
+			<item value="id"/>
+			<item value="id_"/>
 			<item value="instrutor"/>
 			<item value="Instrutor"/>
 			<item value="editora"/>

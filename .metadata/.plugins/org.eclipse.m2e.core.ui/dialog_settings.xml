@@ -2,9 +2,10 @@
 <section name="Workbench">
 	<section name="MavenProjectImportWizardPage">
 		<list key="rootDirectory">
+			<item value="C:\Users\Rebeca\Desktop\api\autor"/>
+			<item value="C:\Users\Rebeca\Desktop\api\academia"/>
 			<item value="C:\Users\Rebeca\Desktop\api\fornecedor"/>
 			<item value="C:\Users\Rebeca\Desktop\api2\residencia-20221-api-fornecedor_produto"/>
-			<item value="C:\Users\Rebeca\Desktop\api\academia"/>
 			<item value="C:\Users\Rebeca\Desktop\api"/>
 			<item value="C:\Users\Rebeca\Desktop\api\api"/>
 			<item value="C:\Users\Rebeca\Desktop\api\1_api"/>

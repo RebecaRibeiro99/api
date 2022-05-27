@@ -75,7 +75,6 @@ public class Fornecedor {
 	private Date dataAbertura;
 
 	@OneToMany(mappedBy = "fornecedor")
-	//@JsonManagedReference
 	private List<Produto> produtoList;
 	
 	public Integer getIdFornecedor() {
