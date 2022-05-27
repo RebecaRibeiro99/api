@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.residencia.comercio.dtos.CadastroEmpresaCepDTO;
 import com.residencia.comercio.dtos.CadastroEmpresaReceitaDTO;
 import com.residencia.comercio.dtos.FornecedorDTO;
 import com.residencia.comercio.entities.Fornecedor;
@@ -37,6 +38,14 @@ public class FornecedorController {
 		CadastroEmpresaReceitaDTO cadEmpresaDTO = fornecedorService.consultarDadosPorCnpj(cnpj);
 		if(null == cadEmpresaDTO)
 			throw new NoSuchElementFoundException("Não foram encontrados dados para o CNPJ informado");
+		else
+			return new ResponseEntity<>(cadEmpresaDTO, HttpStatus.OK);
+	}
+	@GetMapping("/{cep}")
+	public ResponseEntity<CadastroEmpresaCepDTO> cadastroEmpresaCepDTO(String cep) {
+		CadastroEmpresaCepDTO cadEmpresaDTO = fornecedorService.consultarDadosPorCep(cep);
+		if(null == cadEmpresaDTO)
+			throw new NoSuchElementFoundException("Não foram encontrados dados para o Cep informado");
 		else
 			return new ResponseEntity<>(cadEmpresaDTO, HttpStatus.OK);
 	}

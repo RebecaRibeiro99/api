@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import com.residencia.comercio.dtos.CadastroEmpresaCepDTO;
 import com.residencia.comercio.dtos.CadastroEmpresaReceitaDTO;
 import com.residencia.comercio.dtos.FornecedorDTO;
 import com.residencia.comercio.entities.Fornecedor;
@@ -87,5 +88,16 @@ public class FornecedorService {
 				restTemplate.getForObject(uri, CadastroEmpresaReceitaDTO.class, params);
 
 		return CadastroEmpresaReceitaDTO;
+	}
+	public CadastroEmpresaCepDTO consultarDadosPorCep(String cep) {
+		RestTemplate restTemplate = new RestTemplate();
+		String uri = "https://viacep.com.br/ws/{cep}/json";
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("cep", cep);
+
+		CadastroEmpresaCepDTO cadastroEmpresaCepDTO = 
+				restTemplate.getForObject(uri, CadastroEmpresaCepDTO.class, params);
+
+		return cadastroEmpresaCepDTO;
 	}
 }
