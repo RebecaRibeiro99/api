@@ -5,7 +5,7 @@ import java.util.Date;
 public class FornecedorDTO {
 	private Integer idFornecedor;
 
-	private Integer cnpj;
+	private String cnpj;
 	private String tipo;
 	private String razaoSocial;
 	private String uf;
@@ -30,11 +30,12 @@ public class FornecedorDTO {
 		this.idFornecedor = idFornecedor;
 	}
 
-	public Integer getCnpj() {
+	
+	public String getCnpj() {
 		return cnpj;
 	}
 
-	public void setCnpj(Integer cnpj) {
+	public void setCnpj(String cnpj) {
 		this.cnpj = cnpj;
 	}
 
@@ -158,5 +159,6 @@ public class FornecedorDTO {
 				+ logradouro + ", numero=" + numero + ", complemento=" + complemento + ", cep=" + cep + ", municipio="
 				+ municipio + ", dataAbertura=" + dataAbertura + "]";
 	}
+
 
 }
