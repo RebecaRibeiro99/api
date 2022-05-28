@@ -1,6 +1,5 @@
 package com.residencia.comercio.entities;
 
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -30,6 +29,10 @@ public class Categoria {
 	@Column(name = "nome_categoria")
 	@NotEmpty(message = "O nome da categoria não pode ficar em branco.")
 	private String nomeCategoria;
+	
+	
+	@Column(name = "imagem")
+    private String nomeImagem;
 	
 	@OneToMany(mappedBy = "categoria")
 	//@JsonManagedReference

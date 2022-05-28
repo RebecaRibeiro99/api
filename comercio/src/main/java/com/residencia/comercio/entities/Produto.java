@@ -8,72 +8,73 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
+import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
-@Table(name="produto")
-@JsonIdentityInfo(
-		scope = Produto.class,
-	    generator = ObjectIdGenerators.PropertyGenerator.class,
-	    property = "idProduto")
+@Table(name = "produto")
+@JsonIdentityInfo(scope = Produto.class, generator = ObjectIdGenerators.PropertyGenerator.class, property = "idProduto")
 public class Produto {
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_produto")
-    private Integer idProduto;
-    @Column(name = "sku")
-    private String sku;
-    @Column(name = "nome_produto")
-    private String nomeProduto;
-    @ManyToOne
-    @JoinColumn(name = "id_categoria", referencedColumnName = "id_categoria")
-    private Categoria categoria;
-    @ManyToOne
-    @JoinColumn(name = "id_fornecedor", referencedColumnName = "id_fornecedor")
-    private Fornecedor fornecedor;
-    public Integer getIdProduto() {
-        return idProduto;
-    }
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_produto")
+	private Integer idProduto;
+	
+	@NotBlank(message = "O sku do produto não pode estar vazio.")
+	@Column(name = "sku")
+	private String sku;
+	
+	@Column(name = "nome_produto")
+	private String nomeProduto;
+	
+	@ManyToOne
+	@JoinColumn(name = "id_categoria", referencedColumnName = "id_categoria")
+	private Categoria categoria;
+	
+	@ManyToOne
+	@JoinColumn(name = "id_fornecedor", referencedColumnName = "id_fornecedor")
+	private Fornecedor fornecedor;
 
-    public void setIdProduto(Integer idProduto) {
-        this.idProduto = idProduto;
-    }
+	public Integer getIdProduto() {
+		return idProduto;
+	}
 
-    public String getSku() {
-        return sku;
-    }
+	public void setIdProduto(Integer idProduto) {
+		this.idProduto = idProduto;
+	}
 
-    public void setSku(String sku) {
-        this.sku = sku;
-    }
+	public String getSku() {
+		return sku;
+	}
 
-    public String getNomeProduto() {
-        return nomeProduto;
-    }
+	public void setSku(String sku) {
+		this.sku = sku;
+	}
 
-    public void setNomeProduto(String nomeProduto) {
-        this.nomeProduto = nomeProduto;
-    }
+	public String getNomeProduto() {
+		return nomeProduto;
+	}
 
-    public Fornecedor getFornecedor() {
-        return fornecedor;
-    }
+	public void setNomeProduto(String nomeProduto) {
+		this.nomeProduto = nomeProduto;
+	}
 
-    public void setFornecedor(Fornecedor fornecedor) {
-        this.fornecedor = fornecedor;
-    }
+	public Fornecedor getFornecedor() {
+		return fornecedor;
+	}
 
-    public Categoria getCategoria() {
-        return categoria;
-    }
+	public void setFornecedor(Fornecedor fornecedor) {
+		this.fornecedor = fornecedor;
+	}
 
-    public void setCategoria(Categoria categoria) {
-        this.categoria = categoria;
-    }
+	public Categoria getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
+	}
 
 }
-
-
