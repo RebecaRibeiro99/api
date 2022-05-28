@@ -1,5 +1,8 @@
 package com.residencia.comercio.services;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -48,6 +51,10 @@ public class FornecedorService {
 		Fornecedor novoFornecedor = fornecedorRepository.save(fornecedor);
 		return converterEntidadeParaDto(novoFornecedor);
 	}
+	public Fornecedor saveFornecedorCnpj(String cnpj) throws ParseException {
+        Fornecedor novoFornecedor = fornecedorCnpj(cnpj);
+        return fornecedorRepository.save(novoFornecedor);
+    }
 	
 	public Fornecedor updateFornecedor(Fornecedor fornecedor) {
 		return fornecedorRepository.save(fornecedor);
@@ -128,4 +135,27 @@ public class FornecedorService {
 
 		return cadastroEmpresaCepDTO;
 	}
+	public Fornecedor fornecedorCnpj(String cnpj) throws ParseException {
+        CadastroEmpresaReceitaDTO cert = consultarDadosPorCnpj(cnpj);
+        Fornecedor fornecedorCnpj = new Fornecedor();
+
+        fornecedorCnpj.setBairro(cert.getBairro());
+        fornecedorCnpj.setCep(cert.getCep());
+        fornecedorCnpj.setComplemento(cert.getComplemento());
+        fornecedorCnpj.setCnpj(cert.getCnpj());
+        fornecedorCnpj.setEmail(cert.getEmail());
+        fornecedorCnpj.setLogradouro(cert.getLogradouro());
+        fornecedorCnpj.setMunicipio(cert.getMunicipio());
+        fornecedorCnpj.setNomeFantasia(cert.getFantasia());
+        fornecedorCnpj.setStatusSituacao(cert.getSituacao());
+        fornecedorCnpj.setTipo(cert.getTipo());
+        fornecedorCnpj.setTelefone(cert.getTelefone());
+        fornecedorCnpj.setRazaoSocial(cert.getNome());
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy"); 
+        Date dataFormatada = formato.parse(cert.getAbertura()); 
+        fornecedorCnpj.setDataAbertura(dataFormatada);
+        fornecedorCnpj.setUf(cert.getUf());
+
+        return fornecedorCnpj;
+    }
 }

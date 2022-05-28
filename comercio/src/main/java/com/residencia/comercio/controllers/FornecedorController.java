@@ -1,5 +1,6 @@
 package com.residencia.comercio.controllers;
 
+import java.text.ParseException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -82,6 +83,11 @@ public class FornecedorController {
 		FornecedorDTO novoFornecedorDTO = fornecedorService.saveFornecedorDTO(fornecedorDTO);
 		return new ResponseEntity<>(novoFornecedorDTO, HttpStatus.CREATED);
 	}
+	@PostMapping("/cnpj/{cnpj}")
+    public ResponseEntity<Fornecedor> saveFornecedorCnpj(@PathVariable String cnpj) throws ParseException {
+        Fornecedor novoFornecedor = fornecedorService.saveFornecedorCnpj(cnpj);
+        return new ResponseEntity<>(novoFornecedor, HttpStatus.CREATED);
+    }
 	
 	@PutMapping
 	public ResponseEntity<Fornecedor> updateFornecedor(@RequestBody Fornecedor fornecedor) {
