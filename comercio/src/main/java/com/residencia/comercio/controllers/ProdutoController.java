@@ -106,4 +106,18 @@ public class ProdutoController {
 		produtoService.deletePorId(id);
 		return new ResponseEntity<>("", HttpStatus.OK);
 	}
+	@GetMapping("/query")
+	public ResponseEntity<Produto> findByIdQuery(
+			@RequestParam
+			@NotBlank(message = "O sku deve ser preenchido.")
+			String sku){
+		return new ResponseEntity<>(null, HttpStatus.CONTINUE);
+	}
+	@GetMapping("/request")
+	public ResponseEntity<Produto> findByIdRequest(
+			@RequestParam
+			@NotBlank(message = "O id deve ser preenchido.")
+			Integer id){
+		return new ResponseEntity<>(null, HttpStatus.CONTINUE);
+	}
 }

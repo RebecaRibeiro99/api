@@ -61,5 +61,13 @@ public class Categoria {
 	public void setProdutoList(List<Produto> produtoList) {
 		this.produtoList = produtoList;
 	}
+
+	public String getNomeImagem() {
+		return nomeImagem;
+	}
+
+	public void setNomeImagem(String nomeImagem) {
+		this.nomeImagem = nomeImagem;
+	}
 	
 }
