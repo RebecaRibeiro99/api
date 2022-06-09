@@ -37,6 +37,7 @@ public class Produto {
 	@JoinColumn(name = "id_fornecedor", referencedColumnName = "id_fornecedor")
 	private Fornecedor fornecedor;
 
+	
 	public Integer getIdProduto() {
 		return idProduto;
 	}
