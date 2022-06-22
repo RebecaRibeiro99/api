@@ -20,6 +20,10 @@ public class ClienteDTO {
 	private String telefoneCliente;
 
 	private EnderecoDTO enderecoDTO;
+	
+	private String senha;
+	
+	private Boolean admin;
 
 	public Integer getIdCliente() {
 		return idCliente;
@@ -75,6 +79,22 @@ public class ClienteDTO {
 
 	public void setEnderecoDTO(EnderecoDTO enderecoDTO) {
 		this.enderecoDTO = enderecoDTO;
+	}
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+
+	public Boolean getAdmin() {
+		return admin;
+	}
+
+	public void setAdmin(Boolean admin) {
+		this.admin = admin;
 	}
 
 	@Override

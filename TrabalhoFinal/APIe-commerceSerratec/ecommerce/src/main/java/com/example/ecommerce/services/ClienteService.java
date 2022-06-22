@@ -47,9 +47,14 @@ public class ClienteService {
 	public ClienteDTO saveClienteDTO(ClienteDTO clienteDTO) {
 		validarCPF(clienteDTO.getCpfCliente());
 		validarEmail(clienteDTO.getEmailCliente());
-		Endereco endereco = enderecoService.consultarCep(clienteDTO.getEnderecoDTO().getCep());
+		Endereco endereco = new Endereco();
+		endereco.setCep(clienteDTO.getEnderecoDTO().getCep());
 		endereco.setComplemento(clienteDTO.getEnderecoDTO().getComplemento());
 		endereco.setNumero(clienteDTO.getEnderecoDTO().getNumero());
+		endereco.setBairro(clienteDTO.getEnderecoDTO().getBairro());
+		endereco.setCidade(clienteDTO.getEnderecoDTO().getCidade());
+		endereco.setRua(clienteDTO.getEnderecoDTO().getRua());
+		endereco.setUf(clienteDTO.getEnderecoDTO().getUf());
 		Endereco saveEndereco = enderecoService.saveEndereco(endereco);
 		clienteDTO.setEnderecoDTO(saveEndereco.converterEntidadeParaDTO());
 		Cliente cliente = converterDTOParaEntidade(clienteDTO);
@@ -60,8 +65,6 @@ public class ClienteService {
 	}
 
 	public ClienteDTO updateClienteDTO(ClienteDTO clienteDTO) {
-		validarCPF(clienteDTO.getCpfCliente());
-		validarEmail(clienteDTO.getEmailCliente());
 		Endereco endereco = enderecoService.consultarCep(clienteDTO.getEnderecoDTO().getCep());
 		endereco.setComplemento(clienteDTO.getEnderecoDTO().getComplemento());
 		endereco.setNumero(clienteDTO.getEnderecoDTO().getNumero());
@@ -86,6 +89,8 @@ public class ClienteService {
 		clienteDTO.setNomeCliente(cliente.getNomeCliente());
 		clienteDTO.setTelefoneCliente(cliente.getTelefoneCliente());
 		clienteDTO.setDataNascimento(cliente.getDataNascimento());
+		clienteDTO.setAdmin(cliente.getAdmin() == null ? Boolean.FALSE : Boolean.TRUE);
+		clienteDTO.setSenha(cliente.getSenha());
 		EnderecoDTO enderecoDTO = enderecoService.findEnderecoDTOById(cliente.getEndereco().getIdEndereco());
 		clienteDTO.setEnderecoDTO(enderecoDTO);
 
@@ -100,6 +105,8 @@ public class ClienteService {
 		cliente.setNomeCliente(clienteDTO.getNomeCliente());
 		cliente.setTelefoneCliente(clienteDTO.getTelefoneCliente());
 		cliente.setDataNascimento(clienteDTO.getDataNascimento());
+		cliente.setAdmin(clienteDTO.getAdmin());
+		cliente.setSenha(clienteDTO.getSenha());
 		Endereco enderecoNovo= new Endereco();
 		enderecoNovo.converterEntidadeParaDTO();
 		cliente.setEndereco(clienteDTO.getEnderecoDTO().converterDTOParaEntidade());
